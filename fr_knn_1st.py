@@ -75,9 +75,11 @@ def train(train_dir, model_save_path='trained_knn_model.clf', n_neighbors=3, knn
 
         # 对当前关注的人(文件夹)遍历其所有照片
         for img_path in image_files_in_folder(os.path.join(train_dir, class_dir)):
+            # image 是加载成numpy数组的图片,本质是一个numpy数组
             image = face_recognition.load_image_file(img_path)
             face_bounding_boxes = face_recognition.face_locations(image)
 
+            print('face_bounding_boxes:{}'.format(face_bounding_boxes))
             if len(face_bounding_boxes) != 1:
                 # 如果当前训练照片中包含有多个人脸或者没有人脸，那么程序会跳过该照片　
                 if verbose:
